@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.nelioalves.cursomc.domain.Categoria;
+import com.nelioalves.cursomc.dto.CategoriaDTO;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
 import com.nelioalves.cursomc.services.exceptions.DataIntegrityException;
 import com.nelioalves.cursomc.services.exceptions.ObjectNotFoundException;
@@ -38,10 +39,10 @@ public class CategoriaService {
 		return repo.save(entity);
 	}
 	
-	public Categoria update(Integer id, Categoria obj) {
+	public Categoria update(Integer id, CategoriaDTO dto) {
 		try {
 			Categoria entity = repo.getOne(id);
-			entity.setNome(obj.getNome());
+			entity.setNome(dto.getNome());
 			return repo.save(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName());
@@ -60,4 +61,8 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}	
+	
+	public Categoria fromDTO(CategoriaDTO dto) {
+		return new Categoria(dto.getId(), dto.getNome());
+	}
 }
