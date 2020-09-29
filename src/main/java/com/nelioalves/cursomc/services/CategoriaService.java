@@ -2,6 +2,8 @@ package com.nelioalves.cursomc.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,15 @@ public class CategoriaService {
 	public Categoria insert(Categoria entity) {
 		entity.setId(null);
 		return repo.save(entity);
+	}
+	
+	public Categoria update(Integer id, Categoria obj) {
+		try {
+			Categoria entity = repo.getOne(id);
+			entity.setNome(obj.getNome());
+			return repo.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName());
+		}
 	}
 }
