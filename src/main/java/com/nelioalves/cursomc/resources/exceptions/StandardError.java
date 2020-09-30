@@ -8,17 +8,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class StandardError implements Serializable {	
 	private static final long serialVersionUID = 1L;
 	
-	private Integer status;
-	private String msg;
-	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant timeStamp;
+	private Instant timeStamp;	
+	private Integer status;
+	private String error;
+	private String message;
+	private String path;
 	
-	public StandardError(Integer status, String msg, Instant timeStamp) {
+	
+	public StandardError(Instant timeStamp, Integer status, String error, String message, String path) {
 		super();
 		this.status = status;
-		this.msg = msg;
+		this.message = message;
 		this.timeStamp = timeStamp;
+		this.setError(error);
+		this.setPath(path);
 	}
 	
 	public Integer getStatus() {
@@ -29,12 +33,12 @@ public class StandardError implements Serializable {
 		this.status = status;
 	}
 	
-	public String getMsg() {
-		return msg;
+	public String getMessage() {
+		return message;
 	}
 	
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setMsg(String message) {
+		this.message = message;
 	}
 	
 	public Instant getTimeStamp() {
@@ -43,5 +47,21 @@ public class StandardError implements Serializable {
 	
 	public void setTimeStamp(Instant timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}	
 }
