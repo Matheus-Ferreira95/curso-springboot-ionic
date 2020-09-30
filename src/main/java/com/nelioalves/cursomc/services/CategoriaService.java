@@ -40,10 +40,10 @@ public class CategoriaService {
 		return repo.save(entity);
 	}
 	
-	public Categoria update(Integer id, CategoriaDTO dto) {
+	public Categoria update(Integer id, Categoria categoria) {
 		try {
 			Categoria entity = repo.getOne(id);
-			entity.setNome(dto.getNome());
+			entity.setNome(categoria.getNome());
 			return repo.save(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName());
