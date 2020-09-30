@@ -21,7 +21,7 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
 		String error = "Object not found.";
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		StandardError err = new StandardError(Instant.now(), status.value(), error, request.getRequestURI());
 		return ResponseEntity.status(status).body(err);		
 	}
 	
@@ -29,7 +29,7 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> dataIntegrity (DataIntegrityException e, HttpServletRequest request) {
 		String error = "DataIntegrity exception.";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		StandardError err = new StandardError(Instant.now(), status.value(), error, request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}	
 
@@ -37,7 +37,7 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> validation (MethodArgumentNotValidException e, HttpServletRequest request) {
 		String error = "Validation error";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		ValidationError err = new ValidationError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());		
+		ValidationError err = new ValidationError(Instant.now(), status.value(), error, request.getRequestURI());		
 		for (FieldError x : e.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}		
