@@ -43,13 +43,17 @@ public class CategoriaService {
 	public Categoria update(Integer id, Categoria categoria) {
 		try {
 			Categoria entity = repo.getOne(id);
-			entity.setNome(categoria.getNome());
+			updateData(entity, categoria);
 			return repo.save(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName());
 		}
 	}
 	
+	private void updateData(Categoria entity, Categoria categoria) {
+		entity.setNome(categoria.getNome());		
+	}
+
 	public void delete(Integer id) {
 		try {
 			repo.deleteById(id);
