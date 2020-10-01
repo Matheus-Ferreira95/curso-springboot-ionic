@@ -42,6 +42,11 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 		if (aux != null && !aux.getId().equals(uriId)) {
 			list.add(new FieldMessage("email", "Email já existente"));
 		}
+		/*
+		 * apenas para fins de estudo -> maneira de se fazer a comparação de ids sem a necessidade do map
+		 * if (aux != null && !aux.getId().equals(objDto.getId()) {
+		 */
+		
 		
 		// para cada erro que tiver na minha lista, eu irei adicionar para a lista de erros do spring
 		for (FieldMessage e : list) {
