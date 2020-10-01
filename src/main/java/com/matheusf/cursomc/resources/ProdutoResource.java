@@ -44,5 +44,12 @@ public class ProdutoResource {
 		Page<Produto> list = service.search(nomeDecoded, ids, page, linesPerPage, orderBy, direction);
 		Page<ProdutoDTO> listDTO = list.map(x -> new ProdutoDTO(x));		
 		return ResponseEntity.ok().body(listDTO);		
-	}	
+	}
+	/*
+	apenas para fins de estudos, uma maneira de se receber as categorias em um array já, sem ser necessario
+	fazer a classe auxiliar de decode
+	
+	@RequestParam(value = "categorias") Integer[] categorias) {	
+	List<Integer> listCategorieIds = Objects.nonNull(categorias) ?   Arrays.asList(categorias) : Collections.emptyList();
+	*/
 }
