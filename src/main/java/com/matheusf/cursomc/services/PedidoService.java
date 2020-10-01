@@ -30,10 +30,7 @@ public class PedidoService {
 	
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	
-	@Autowired
-	private ClienteService clienteService;
-	
+			
 	@Autowired
 	private ProdutoService produtoService;
 		

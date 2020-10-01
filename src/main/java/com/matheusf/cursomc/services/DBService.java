@@ -1,11 +1,11 @@
-package com.matheusf.cursomc.config;
+package com.matheusf.cursomc.services;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import com.matheusf.cursomc.domain.Categoria;
 import com.matheusf.cursomc.domain.Cidade;
@@ -30,9 +30,9 @@ import com.matheusf.cursomc.repositories.PagamentoRepository;
 import com.matheusf.cursomc.repositories.PedidoRepository;
 import com.matheusf.cursomc.repositories.ProdutoRepository;
 
-@Configuration
-public class TesteConfig implements CommandLineRunner{
-
+@Service
+public class DBService {
+	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
@@ -60,8 +60,7 @@ public class TesteConfig implements CommandLineRunner{
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-	@Override
-	public void run(String... args) throws Exception {
+	public void instantiateTestDatabase() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
