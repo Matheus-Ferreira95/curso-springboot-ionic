@@ -25,7 +25,6 @@ import com.matheusf.cursomc.dto.ClienteDTO;
 import com.matheusf.cursomc.dto.ClienteNewDTO;
 import com.matheusf.cursomc.services.ClienteService;
 
-
 @RestController
 @RequestMapping(value="/clientes")
 public class ClienteResource {
