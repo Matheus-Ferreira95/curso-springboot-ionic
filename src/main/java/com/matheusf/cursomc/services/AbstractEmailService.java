@@ -23,7 +23,7 @@ public abstract class AbstractEmailService implements EmailService {
 	@Autowired
 	private TemplateEngine templateEngine;
 	
-	@Autowired(required = false)
+	@Autowired(required = false) // quando for mudar o profile de test para dev, lembrar de tirar o false
 	private JavaMailSender javaMailSender;
 	
 	@Override
