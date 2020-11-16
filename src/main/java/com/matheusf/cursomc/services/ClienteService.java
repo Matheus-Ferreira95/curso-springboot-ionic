@@ -31,19 +31,20 @@ import com.matheusf.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
-
-	@Autowired
-	private BCryptPasswordEncoder pe;
 	
 	@Autowired
 	private ClienteRepository repo;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 
-	public Cliente findById(Integer id) {
+	public Cliente findById(Integer id) {			
+		
 		UserSS user = UserService.authenticated();
-		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
 		
@@ -51,7 +52,7 @@ public class ClienteService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
-	
+		
 	public List<Cliente> findAll() {
 		return repo.findAll();
 	}
@@ -64,7 +65,7 @@ public class ClienteService {
 		return entity;
 	}
 		
-	public Cliente update(Integer id, Cliente obj) {
+	public Cliente update(Integer id, ClienteDTO obj) {
 		try {
 			Cliente entity = repo.getOne(id);
 			updateData(entity, obj);
@@ -74,7 +75,7 @@ public class ClienteService {
 		}
 	}
 	
-	private void updateData(Cliente entity, Cliente obj) {
+	private void updateData(Cliente entity, ClienteDTO obj) {
 		entity.setNome(obj.getNome());
 		entity.setEmail(obj.getEmail());		
 	}
@@ -94,9 +95,9 @@ public class ClienteService {
 		return repo.findAll(pageRequest);
 	}	
 	
-	public Cliente fromDTO(ClienteDTO dto) {
+	/*public Cliente fromDTO(ClienteDTO dto) {
 		return new Cliente(dto.getId(), dto.getNome(), dto.getEmail(), null, null, null);
-	}
+	}*/
 	
 	public Cliente fromDTO(ClienteNewDTO dto) {
 		Cliente cli = new Cliente(null, dto.getNome(), dto.getEmail(), dto.getCpfOuCnpj(), TipoCliente.toEnum(dto.getTipo()), pe.encode(dto.getSenha()));

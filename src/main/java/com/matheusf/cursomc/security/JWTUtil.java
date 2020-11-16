@@ -11,10 +11,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JWTUtil {
-	
+
 	@Value("${jwt.secret}")
 	private String secret;
-
+	
 	@Value("${jwt.expiration}")
 	private Long expiration;
 	
@@ -27,8 +27,8 @@ public class JWTUtil {
 	}
 	
 	public boolean tokenValido(String token) {
-		Claims claims = getClaims(token);
-		if (claims != null) {
+		Claims claims = getClaims(token); 
+		if (claims != null) {				
 			String username = claims.getSubject();
 			Date expirationDate = claims.getExpiration();
 			Date now = new Date(System.currentTimeMillis());
@@ -36,9 +36,9 @@ public class JWTUtil {
 				return true;
 			}
 		}
-		return false;
+		return false;		
 	}
-
+	
 	public String getUsername(String token) {
 		Claims claims = getClaims(token);
 		if (claims != null) {
@@ -55,4 +55,5 @@ public class JWTUtil {
 			return null;
 		}
 	}
+	
 }

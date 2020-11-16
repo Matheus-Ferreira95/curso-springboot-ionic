@@ -1,3 +1,4 @@
+
 package com.matheusf.cursomc.resources;
 
 import java.net.URI;
@@ -38,7 +39,7 @@ public class ClienteResource {
 		Cliente obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);		
 	}
-	
+		
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping
 	public ResponseEntity<List<ClienteDTO>> findAll() {
@@ -53,7 +54,7 @@ public class ClienteResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
@@ -62,12 +63,11 @@ public class ClienteResource {
 	}
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO dto, @PathVariable Integer id) {	
-		Cliente entity = service.fromDTO(dto);
-		service.update(id, entity);
+	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO dto, @PathVariable Integer id) {			
+		service.update(id, dto);
 		return ResponseEntity.noContent().build();
 	}
-	
+		
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping(value="/page")
 	public ResponseEntity<Page<ClienteDTO>> findPage(

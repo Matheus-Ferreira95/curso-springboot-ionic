@@ -64,7 +64,7 @@ public class DBService {
 	
 	@Autowired
 	private BCryptPasswordEncoder pe;
-	
+		
 	public void instantiateTestDatabase() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Informática");
@@ -123,16 +123,17 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(e1, e2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
-		Cliente cliente1 = new Cliente(null,"Maria Silva","matheusfdsilva12@gmail.com", "36378912377", TipoCliente.PESSOAFISICA, pe.encode("123"));		
+		Cliente cliente1 = new Cliente(null,"Maria Silva","matheusfdsilva12@gmail.com", "36378912377", TipoCliente.PESSOAFISICA,pe.encode("123"));		
 		cliente1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
-		
+			
 		Cliente cliente2 = new Cliente(null,"Ana costa","mfs1205@hotmail.com", "55619494039", TipoCliente.PESSOAFISICA, pe.encode("123"));	
-		cliente2.addPerfil(Perfil.ADMIN);
 		cliente2.getTelefones().addAll(Arrays.asList("8654729", "123123123"));
+		cliente2.addPerfil(Perfil.ADMIN);
 		
 		Endereco end1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cliente1, c1);
 		Endereco end2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cliente1, c2);
 		Endereco end3 = new Endereco(null, "Avenida Floriano", "2105", null, "Centro", "77475474", cliente2, c2);
+				
 		
 		cliente1.getEnderecos().addAll(Arrays.asList(end1, end2));
 		cliente2.getEnderecos().addAll(Arrays.asList(end3));
@@ -154,6 +155,13 @@ public class DBService {
 		cliente1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		
+		/*
+		 * não é necessario salvar o cliente novamente porque quem referencia o cliente é o pedido e não ao contrário,
+		 *  podemos ver isso melhor analisando as tabelas no banco de dados.
+		 * 
+		 */
+		
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 		
 		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, p1.getPreco());

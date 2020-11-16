@@ -25,14 +25,14 @@ import com.matheusf.cursomc.domain.Categoria;
 import com.matheusf.cursomc.dto.CategoriaDTO;
 import com.matheusf.cursomc.services.CategoriaService;
 
-
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 
 	@Autowired
 	private CategoriaService service;
-	
+		
+		
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
 		Categoria obj = service.findById(id);
@@ -54,7 +54,7 @@ public class CategoriaResource {
 			.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+		
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO dto, @PathVariable Integer id) {	
@@ -62,13 +62,13 @@ public class CategoriaResource {
 		service.update(id, entity);
 		return ResponseEntity.noContent().build();
 	}
-	
+		
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
-	}
+	}	
 	
 	@GetMapping(value="/page")
 	public ResponseEntity<Page<CategoriaDTO>> findPage(

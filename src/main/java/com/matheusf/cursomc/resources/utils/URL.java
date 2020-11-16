@@ -17,7 +17,9 @@ public class URL {
 	}
 	
 	public static List<Integer> decodeIntList(String s){		
-		return Arrays.asList(s.split(",")).stream().map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+		return Arrays.asList(s.split(",")).stream()
+				.map(x -> Integer.parseInt(x))
+				.collect(Collectors.toList());
 		/*
 		String[] vet = s.split(",");
 		List<Integer> list = new ArrayList<>();

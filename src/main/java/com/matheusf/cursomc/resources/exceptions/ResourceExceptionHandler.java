@@ -43,12 +43,13 @@ public class ResourceExceptionHandler {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}		
 		return ResponseEntity.status(status).body(err);
-	}
+	}	
 	
 	@ExceptionHandler(AuthorizationException.class)
-	public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
-		String error = "Authorization error";
-		StandardError err = new StandardError(Instant.now(), HttpStatus.FORBIDDEN.value(), error, request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+	public ResponseEntity<StandardError> authorizationException (AuthorizationException e, HttpServletRequest request){		
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);		
 	}
+	
 }

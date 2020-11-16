@@ -100,7 +100,7 @@ public class Pedido implements Serializable {
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}	
 
-	public Set<ItemPedido> getItens() {
+	public Set<ItemPedido> getItens() {	
 		return itens;
 	}
 

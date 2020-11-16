@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.matheusf.cursomc.domain.enums.Perfil;
 
-public class UserSS implements UserDetails {	
+public class UserSS implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -26,20 +26,20 @@ public class UserSS implements UserDetails {
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
-		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescription())).collect(Collectors.toList());
+		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
 	
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {		
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}
 
 	@Override
-	public String getPassword() {		
+	public String getPassword() {
 		return senha;
 	}
 
@@ -49,26 +49,26 @@ public class UserSS implements UserDetails {
 	}
 
 	@Override
-	public boolean isAccountNonExpired() {	
+	public boolean isAccountNonExpired() {
 		return true;
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {		
+	public boolean isAccountNonLocked() {
 		return true;
 	}
 
 	@Override
-	public boolean isCredentialsNonExpired() {		
+	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
-	public boolean isEnabled() {		
+	public boolean isEnabled() {
 		return true;
 	}
-	
+
 	public boolean hasRole(Perfil perfil) {
-		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescription()));
-	}
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	}	
 }

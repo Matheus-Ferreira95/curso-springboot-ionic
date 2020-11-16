@@ -16,7 +16,6 @@ import com.matheusf.cursomc.dto.ProdutoDTO;
 import com.matheusf.cursomc.resources.utils.URL;
 import com.matheusf.cursomc.services.ProdutoService;
 
-
 @RestController
 @RequestMapping(value="/produtos")
 public class ProdutoResource {

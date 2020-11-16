@@ -17,7 +17,7 @@ import com.matheusf.cursomc.services.validation.utils.BR;
 
 																	// nome da classe q sera nossa anotacao e a classe que a usara
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
-
+	
 	@Autowired
 	private ClienteRepository repo;
 	
@@ -28,7 +28,7 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 	@Override
 	public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
 		
-		List<FieldMessage> list = new ArrayList<>();
+		List<FieldMessage> list = new ArrayList<>();		;
 		
 		if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCode()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
 			list.add(new FieldMessage("cpfOuCnpj", "CPF inválido"));
@@ -48,7 +48,8 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
 					.addConstraintViolation();
-		}
+		}		
+		
 		return list.isEmpty();
 	}
 }
